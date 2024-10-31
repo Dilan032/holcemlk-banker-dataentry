@@ -17,4 +17,4 @@ app.listen(PORT, () => {
 });
 
 
-app.use('/save', require('./routes'));
+app.use('/', require('./routes'));

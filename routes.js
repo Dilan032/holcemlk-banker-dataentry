@@ -3,7 +3,8 @@ const router = express.Router();
 
 const saveDataController = require('./controllers/saveDataController');
 
-router.post('/' ,saveDataController.saveData);
+// save all data from client
+router.post('/save' ,saveDataController.saveData);
 
 // Export the router
 module.exports = router;

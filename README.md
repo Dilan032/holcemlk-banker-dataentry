@@ -4,3 +4,12 @@
 | `body-parser` | `dotenv` | `express` | `mysql2` |
 
 <hr>
+
+# End-points
+
+<br>
+
+## login
+- /save 🙇‍♂️ |`post request`| user can enter any value in database (database column name) to INSERT (dynamic sql query)
+
+  <br>

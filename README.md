@@ -10,6 +10,7 @@
 <br>
 
 ## for save the client data
-- /save 🙇‍♂️ |`post request`| user can enter any value in database (database column name) to INSERT (dynamic sql query)
+- /save 🙇‍♂️ |`post request`| Input is required -> `AccountNumber` | 
+user can enter any value in database (database column name) to INSERT (dynamic sql query)
 
   <br>

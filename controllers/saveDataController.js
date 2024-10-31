@@ -8,6 +8,10 @@ exports.saveData = (req, res) => {
         return res.status(400).json({ message: 'No data provided for insertion' });
     }
 
+    if(!Data.AccountNumber){
+        return res.status(400).json({ message: 'Place provided the AccountNumber' });
+    }
+
     // Prepare query for dynamic insertion
     const fields = Object.keys(Data);
     const placeholders = fields.map(() => '?').join(', ');

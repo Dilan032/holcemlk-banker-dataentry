@@ -4,11 +4,19 @@ const router = express.Router();
 const savingAccountController = require('./controllers/saveDetails/savingAccountController');
 const loanController = require('./controllers/saveDetails/loanController');
 const fixedDepositController = require('./controllers/saveDetails/fixedDepositController');
+const ledgerNameController = require('./controllers/showDetails/savingAcc/savingLedgerNameController');
+const loanLedgerNameController = require('./controllers/showDetails/loanAcc/loanLedgerNameController');
+const fixedDepoLedgerNameController = require('./controllers/showDetails/fixedDepoAcc/fixedDepoLedgerNameController');
 
 // save all data from client
 router.post('/savingAccSave' ,savingAccountController.savingAccSave);
 router.post('/loanSave' ,loanController.loanSave);
 router.post('/fixedDepositSave' ,fixedDepositController.fixedDepositSave);
+
+// show LedgerName
+router.get('/SavingLedgerName' ,ledgerNameController.savingAccLedgerName);
+router.get('/loanLedgerName' ,loanLedgerNameController.loanLedgerName);
+router.get('/fixedDepoLedgerName' ,fixedDepoLedgerNameController.fixedDepoLedgerName);
 
 // Export the router
 module.exports = router;

@@ -11,7 +11,7 @@ exports.instituteList = (req, res) => {
         }
 
         if (result.length === 0) {
-            return res.status(404).json({ message: 'Institute details not found' });
+            return res.status(404).json({ message: 'Institute id not found' });
         }
 
         const instituteID = result[0].InstituteID;
@@ -23,7 +23,7 @@ exports.instituteList = (req, res) => {
             }
 
             if (result.length === 0) {
-                return res.status(404).json({ message: 'Institute details not found' });
+                return res.status(404).json({ message: 'Institute Name not found' });
             }
 
             // Return Institute information

@@ -8,6 +8,8 @@ const ledgerNameController = require('./controllers/showDetails/savingAcc/saving
 const loanLedgerNameController = require('./controllers/showDetails/loanAcc/loanLedgerNameController');
 const fixedDepoLedgerNameController = require('./controllers/showDetails/fixedDepoAcc/fixedDepoLedgerNameController');
 
+const customerTypeController = require('./controllers/showDetails/customerTypeController');
+
 // save all data from client
 router.post('/savingAccSave' ,savingAccountController.savingAccSave);
 router.post('/loanSave' ,loanController.loanSave);
@@ -17,6 +19,9 @@ router.post('/fixedDepositSave' ,fixedDepositController.fixedDepositSave);
 router.get('/SavingLedgerName' ,ledgerNameController.savingAccLedgerName);
 router.get('/loanLedgerName' ,loanLedgerNameController.loanLedgerName);
 router.get('/fixedDepoLedgerName' ,fixedDepoLedgerNameController.fixedDepoLedgerName);
+
+// show Customer Type
+router.get('/CustomerType' ,customerTypeController.CustomerType);
 
 // Export the router
 module.exports = router;

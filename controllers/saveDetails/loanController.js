@@ -65,26 +65,27 @@ exports.loanSave = (req, res) => {
             const IssuedLoanAmount = Data.IssuedLoanAmount;
             const LoanStartDate = Data.LoanStartDate;
 
+            // Calculated Due Date using LoanStartDate and Period
             const loanStartDate = new Date(Data.LoanStartDate); // Convert LoanStartDate to a Date object
-const dueMonths = parseInt(Data.Period, 10); // Ensure DueDate is a number
+            const dueMonths = parseInt(Data.Period, 10); // Ensure DueDate is a number
 
-// Check if loanStartDate is valid
-if (isNaN(loanStartDate.getTime())) {
-    console.error("Invalid Loan Start Date");
-    return res.status(400).json({ message: 'Invalid Loan Start Date provided' });
-}
+            // Check if loanStartDate is valid
+            if (isNaN(loanStartDate.getTime())) {
+                console.error("Invalid Loan Start Date");
+                return res.status(400).json({ message: 'Invalid Loan Start Date provided' });
+            }
 
-if (isNaN(dueMonths)) {
-    console.error("Invalid Period");
-    return res.status(400).json({ message: 'Invalid Period provided' });
-}
+            if (isNaN(dueMonths)) {
+                console.error("Invalid Period");
+                return res.status(400).json({ message: 'Invalid Period provided' });
+            }
 
-// Add the due months to the loan start date
-loanStartDate.setMonth(loanStartDate.getMonth() + dueMonths);
+            // Add the due months to the loan start date
+            loanStartDate.setMonth(loanStartDate.getMonth() + dueMonths);
 
-// Format the DueDate as a string (e.g., 'YYYY-MM-DD')
-const DueDate = loanStartDate.toISOString().split('T')[0];
-console.log("Calculated Due Date:", DueDate);
+            // Format the DueDate as a string (e.g., 'YYYY-MM-DD')
+            const DueDate = loanStartDate.toISOString().split('T')[0];
+            console.log("Calculated Due Date:", DueDate);
 
 
 
@@ -118,7 +119,6 @@ console.log("Calculated Due Date:", DueDate);
                             [CustomerID, AccountType, loanStartDate, InterestRate, dueMonths, DueDate, LoanGuarantee1, LoanGuarantee2, IssuedLoanAmount, AccountLastTransactionDate, ledgerID, AccountNumber],
                             (error, result) => {
                                 if (error) {
-                                    console.log(error);
                                     return res.status(500).json({ message: 'Server error, please try again later' });
                                 } else {
                                     res.status(200).json({

@@ -27,7 +27,7 @@ router.get('/fixedDepoLedgerName' ,fixedDepoLedgerNameController.fixedDepoLedger
 router.get('/CustomerType' ,customerTypeController.CustomerType);
 
 // showinstitute List
-router.get('/instituteList' ,instituteListController.instituteList);
+router.post('/instituteList' ,instituteListController.instituteList);
 
 
 

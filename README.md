@@ -5,12 +5,35 @@
 
 <hr>
 
-# End-points
+Deploy backend
+- `npm init -y` 
+- `npm i body-parser dotenv express mysql2` 
+- create .env file and add database details
 
+<hr>
+
+To run backend
+- node app
+
+<hr>
 <br>
 
-## for save the client data
-- /save 🙇‍♂️ |`post request`| Input is required -> `AccountNumber` | <br>
-user can enter any value in database (database column name) to INSERT (dynamic sql query)
+# End-points
 
-  <br>
+## for save the client data
+- /savingAccSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `ledgerName` 
+  
+- /loanSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `ledgerName` , `LoanGuarantee1` , `LoanGuarantee2` , `Period` (int) , `IssuedLoanAmount` , `LoanStartDate` 
+
+- /fixedDepositSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `ledgerName` , `PaidFDInterestAmount` , `InterestRate` , `Period` (int) , `OpenDate` 
+
+## show Ledger Name list
+- /SavingLedgerName  🙇‍♂️ |`get request`|
+- /loanLedgerName  🙇‍♂️ |`get request`|
+- /fixedDepoLedgerName  🙇‍♂️ |`get request`|
+
+## show Customer Type
+- /CustomerType 🙇‍♂️ |`get request`|
+
+## instituteList 
+- /instituteList 🙇‍♂️ |`post request`| Input is required -> `LedgerID` , `LedgerName`

@@ -5,6 +5,18 @@
 
 <hr>
 
+Deploy backend
+- `npm init -y` 
+- `npm i body-parser dotenv express mysql2` 
+- create .env file and add database details
+
+<hr>
+
+To run backend
+- node app
+
+<hr>
+
 # End-points
 
 <br>

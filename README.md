@@ -16,13 +16,15 @@ To run backend
 - node app
 
 <hr>
+<br>
 
 # End-points
 
-<br>
-
 ## for save the client data
-- /save 🙇‍♂️ |`post request`| Input is required -> `AccountNumber` | <br>
-user can enter any value in database (database column name) to INSERT (dynamic sql query)
+- /savingAccSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `ledgerName` 
+  
+- /loanSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `ledgerName` , `LoanGuarantee1` , `LoanGuarantee2` , `Period` (int) , `IssuedLoanAmount` , `LoanStartDate` 
+
+- /fixedDepositSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `ledgerName` , `PaidFDInterestAmount` , `InterestRate` , `Period` (int) , `OpenDate` 
 
   <br>

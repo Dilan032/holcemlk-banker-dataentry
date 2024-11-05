@@ -17,7 +17,7 @@ exports.instituteList = (req, res) => {
         const instituteID = result[0].InstituteID;
 
         // Get Institute name
-        db.query('SELECT InstituteName FROM instituteinformation WHERE InstituteID = ?', [instituteID], (error, result) => {
+        db.query('SELECT InstituteName,InstituteID FROM instituteinformation WHERE InstituteID = ?', [instituteID], (error, result) => {
             if (error) {
                 return res.status(500).json({ message: 'Server error, please try again later' });
             }
@@ -28,7 +28,8 @@ exports.instituteList = (req, res) => {
 
             // Return Institute information
             // res.status(200).json(result[0]);
-            res.status(200).json(result);
+            const ledgerNames = result.map(row => ({ InstituteName: row.InstituteName, InstituteID: row.InstituteID }));
+            res.status(200).json(ledgerNames);
         });
     });
 };

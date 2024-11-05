@@ -27,4 +27,13 @@ To run backend
 
 - /fixedDepositSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `ledgerName` , `PaidFDInterestAmount` , `InterestRate` , `Period` (int) , `OpenDate` 
 
-  <br>
+## show Ledger Name list
+- /SavingLedgerName  🙇‍♂️ |`get request`|
+- /loanLedgerName  🙇‍♂️ |`get request`|
+- /fixedDepoLedgerName  🙇‍♂️ |`get request`|
+
+## show Customer Type
+- /CustomerType 🙇‍♂️ |`get request`|
+
+## instituteList 
+- /instituteList 🙇‍♂️ |`post request`| Input is required -> `LedgerID` , `LedgerName`

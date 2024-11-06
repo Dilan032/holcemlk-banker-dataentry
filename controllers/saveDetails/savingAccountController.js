@@ -9,87 +9,71 @@ exports.savingAccSave = (req, res) => {
         return res.status(400).json({ message: 'No data provided for insertion' });
     }
 
-    // check request the feild
-    if(!Data.AccountBalance){
-        return res.status(400).json({ message: 'Place provided the Account Balance' });
-    }
-    if(!Data.InterestRate){
-        return res.status(400).json({ message: 'Place provided the Interest Rate' });
-    }
-    if(!Data.CustomerID){
-        return res.status(400).json({ message: 'Place provided the Customer ID' });
-    }
-    if(!Data.ledgerName){
-        return res.status(400).json({ message: 'Place provided the ledger Name' });
+    // Validate required fields
+    const requiredFields = ['AccountBalance', 'InterestRate', 'CustomerID', 'ledgerName'];
+    for (const field of requiredFields) {
+        if (!Data[field]) {
+            return res.status(400).json({ message: `Please provide the ${field}` });
+        }
     }
 
-    // check the customer ID avalable or not
-    db.query('SELECT CustomerID FROM customerinformation',(error, result) => {
-        if (error) {
-            return res.status(500).json({ message: 'Server error, please try again later' });
-        }
-        
-        // Find the customer ID in the result
+    // Verify CustomerID existence
+    db.query('SELECT CustomerID FROM customerinformation', (error, result) => {
+        if (error) return res.status(500).json({ message: 'Server error, please try again later' });
+
         const customerExists = result.find(row => row.CustomerID === Data.CustomerID);
+        if (!customerExists) return res.status(404).json({ message: 'Client ID is incorrect' });
 
-        if (!customerExists) {
-            return res.status(404).json({ message: 'Client ID is incorrect' });
-        }
+        // Initialize values
+        const { CustomerID, AccountBalance, InterestRate, ledgerName } = Data;
+        const AccountType = "S";
+        const AccountLastTransactionDate = getDateAndTime(); // current date and time
 
-            //insert data
-            const CustomerID = Data.CustomerID;
-            const AccountType = "S";
-            const AccountBalance = Data.AccountBalance;
-            const InterestRate = Data.InterestRate;
-            const AccountLastTransactionDate = getDateAndTime(); // getDateAndTime function in (functions/dateAndTime) 
-            const ledgerName = Data.ledgerName; // this is for get the ledgerID
+        // Fetch ledgerID using ledgerName
+        db.query('SELECT ledgerID FROM ledgeraccounts WHERE ledgerName = ?', [ledgerName], (error, result) => {
+            if (error) return res.status(500).json({ message: 'Server error, please try again later' });
+            if (result.length === 0) return res.status(404).json({ message: 'Ledger not found' });
 
-            // get LedgerID 
-            db.query('SELECT ledgerID FROM ledgeraccounts WHERE ledgerName = ?',[ledgerName],(error, result) => {
-                if (error) {
-                    return res.status(500).json({ message: 'Server error, please try again later' });
-                }
-                // Ensure that the result has a ledgerID
-                if (result.length > 0) {
-                    const ledgerID = result[0].ledgerID;
+            const ledgerID = result[0].ledgerID;
 
-                    // create account number
-                    const lastFiveDigits = CustomerID.slice(-5); // get lastFiveDigits in CustomerID
-                    const AccountNumber = `${ledgerID}-${lastFiveDigits}`;
+            // Generate next AccountNumber based on maxAccountNumber
+            db.query(
+                `SELECT MAX(CAST(RIGHT(AccountNumber, 5) AS UNSIGNED)) AS maxAccountNumber 
+                 FROM ledgerdetails WHERE LedgerID = ?`,
+                [ledgerID],
+                (error, result) => {
+                    if (error) return res.status(500).json({ message: 'Server error, please try again later' });
 
+                    let nextAccountNumber = (result[0].maxAccountNumber || 0) + 1;
+                    if (nextAccountNumber > 99999) {
+                        return res.status(400).json({ message: 'Account number limit reached' });
+                    }
+
+                    const AccountNumber = `${ledgerID}-` + nextAccountNumber.toString().padStart(5, '0');
+                    console.log(AccountNumber);
+                    
                     // Check for duplicate AccountNumber
                     db.query('SELECT AccountNumber FROM ledgerdetails WHERE AccountNumber = ?', [AccountNumber], (error, result) => {
-                        if (error) {
-                            return res.status(500).json({ message: 'Server error, please try again later' });
-                        }
+                        if (error) return res.status(500).json({ message: 'Server error, please try again later' });
 
                         if (result.length > 0) {
-                            // AccountNumber already exists
                             return res.status(400).json({ message: 'This customer has already paid for this product' });
                         }
 
-                        //insert client data to table
-                        db.query('INSERT INTO ledgerdetails (CustomerID, AccountType, AccountBalance, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                        // Insert client data into ledgerdetails table
+                        db.query(
+                            'INSERT INTO ledgerdetails (CustomerID, AccountType, AccountBalance, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?, ?)',
                             [CustomerID, AccountType, AccountBalance, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber],
                             (error, result) => {
                                 if (error) {
                                     return res.status(500).json({ message: 'Server error, please try again later' });
-                                } else {
-                                    res.status(200).json({
-                                        message: 'Client details inserted successfully'
-                                    });
                                 }
+                                res.status(200).json({ message: 'Client details inserted successfully' });
                             }
                         ); // end INSERT query
-
-                    }); // end duplicate AccountNumber query    
-
-                } else {
-                    res.status(404).json({ message: 'Ledger not found' });
+                    }); // end duplicate AccountNumber query
                 }
-                
-            });// end LedgerID SELECT query
-            
-    }); // customer ID query
-    
+            ); // end AccountNumber generation query
+        }); // end ledgerID query
+    }); // end CustomerID query
 };

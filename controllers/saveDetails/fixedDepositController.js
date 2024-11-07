@@ -25,6 +25,8 @@ exports.fixedDepositSave = (req, res) => {
         const InterestRate = Data.InterestRate;
         const AccountLastTransactionDate = getDateAndTime();
         const ledgerName = Data.ledgerName;
+        const PaidFDInterestAmount = Data.PaidFDInterestAmount || 0 ;
+        
 
         db.query('SELECT ledgerID FROM ledgeraccounts WHERE ledgerName = ?', [ledgerName], (error, result) => {
             if (error) return res.status(500).json({ message: 'Server error, please try again later' });
@@ -61,8 +63,8 @@ exports.fixedDepositSave = (req, res) => {
                         if (result.length > 0) return res.status(400).json({ message: 'This customer has already paid for this product' });
 
                         db.query(
-                            'INSERT INTO ledgerdetails (AccountBalance, CustomerID, AccountType, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                            [AccountBalance, CustomerID, AccountType, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber],
+                            'INSERT INTO ledgerdetails (AccountBalance, PaidFDInterestAmount, CustomerID, AccountType, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                            [AccountBalance, PaidFDInterestAmount, CustomerID, AccountType, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber],
                             (error, result) => {
                                 if (error) return res.status(500).json({ message: 'Server error, please try again later' });
                                 res.status(200).json({ message: 'Client details inserted successfully' });

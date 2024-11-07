@@ -19,7 +19,8 @@ exports.fixedDepositSave = (req, res) => {
         if (error) return res.status(500).json({ message: 'Server error, please try again later' });
         if (result.length === 0) return res.status(404).json({ message: 'Customer ID is incorrect' });
 
-        const AccountBalance = Data.CustomerID;
+        const Period = Data.Period;
+        const AccountBalance = Data.AccountBalance;
         const CustomerID = Data.CustomerID;
         const AccountType = "F";
         const InterestRate = Data.InterestRate;
@@ -63,8 +64,8 @@ exports.fixedDepositSave = (req, res) => {
                         if (result.length > 0) return res.status(400).json({ message: 'This customer has already paid for this product' });
 
                         db.query(
-                            'INSERT INTO ledgerdetails (AccountBalance, PaidFDInterestAmount, CustomerID, AccountType, InterestRate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                            [AccountBalance, PaidFDInterestAmount, CustomerID, AccountType, InterestRate, ledgerID, AccountNumber],
+                            'INSERT INTO ledgerdetails (Period, AccountBalance, PaidFDInterestAmount, CustomerID, AccountType, InterestRate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+                            [Period, AccountBalance, PaidFDInterestAmount, CustomerID, AccountType, InterestRate, ledgerID, AccountNumber],
                             (error, result) => {
                                 if (error) return res.status(500).json({ message: 'Server error, please try again later' });
                                 res.status(200).json({ message: 'Client details inserted successfully' });

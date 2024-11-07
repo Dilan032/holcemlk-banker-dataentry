@@ -12,7 +12,7 @@ exports.loanSave = (req, res) => {
     // Check request fields
     const requiredFields = [
         'LoanStartDate', 'InterestRate', 'Period', 'LoanGuarantee1',
-        'LoanGuarantee2', 'IssuedLoanAmount', 'CustomerID', 'ledgerName'
+        'LoanGuarantee2', 'IssuedLoanAmount', 'CustomerID', 'ledgerName', 'AccountLastTransactionDate'
     ];
 
     for (const field of requiredFields) {
@@ -41,10 +41,11 @@ exports.loanSave = (req, res) => {
             LoanGuarantee2,
             IssuedLoanAmount,
             LoanStartDate,
-            Period
+            Period,
+            AccountLastTransactionDate
         } = Data;
         const AccountType = "L";
-        const AccountLastTransactionDate = getDateAndTime();
+        // const AccountLastTransactionDate = getDateAndTime(); // Not used
 
         // Calculate DueDate
         const loanStartDate = new Date(LoanStartDate);

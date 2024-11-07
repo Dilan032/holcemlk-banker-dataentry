@@ -27,7 +27,7 @@ exports.savingAccSave = (req, res) => {
         // Initialize values
         const { CustomerID, AccountBalance, InterestRate, ledgerName } = Data;
         const AccountType = "S";
-        const AccountLastTransactionDate = getDateAndTime(); // current date and time
+        const AccountLastTransactionDate = getDateAndTime(); // Not used
 
         // Fetch ledgerID using ledgerName
         db.query('SELECT ledgerID FROM ledgeraccounts WHERE ledgerName = ?', [ledgerName], (error, result) => {
@@ -62,8 +62,8 @@ exports.savingAccSave = (req, res) => {
 
                         // Insert client data into ledgerdetails table
                         db.query(
-                            'INSERT INTO ledgerdetails (CustomerID, AccountType, AccountBalance, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?, ?)',
-                            [CustomerID, AccountType, AccountBalance, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber],
+                            'INSERT INTO ledgerdetails (CustomerID, AccountType, AccountBalance, InterestRate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?)',
+                            [CustomerID, AccountType, AccountBalance, InterestRate, ledgerID, AccountNumber],
                             (error, result) => {
                                 if (error) {
                                     return res.status(500).json({ message: 'Server error, please try again later' });

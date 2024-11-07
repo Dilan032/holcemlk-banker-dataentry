@@ -35,5 +35,5 @@ To run backend
 ## show Customer Type
 - /CustomerType 🙇‍♂️ |`get request`|
 
-## instituteList 
+## show instituteList 
 - /instituteList 🙇‍♂️ |`post request`| Input is required -> `LedgerID` , `LedgerName`

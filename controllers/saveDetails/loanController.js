@@ -12,7 +12,7 @@ exports.loanSave = (req, res) => {
     // Check request fields
     const requiredFields = [
         'LoanStartDate', 'InterestRate', 'Period', 'LoanGuarantee1',
-        'LoanGuarantee2', 'IssuedLoanAmount', 'CustomerID', 'ledgerName', 'AccountLastTransactionDate'
+        'LoanGuarantee2', 'IssuedLoanAmount', 'CustomerID', 'ledgerName', 'AccountLastTransactionDate', 'AccountBalance'
     ];
 
     for (const field of requiredFields) {
@@ -42,7 +42,8 @@ exports.loanSave = (req, res) => {
             IssuedLoanAmount,
             LoanStartDate,
             Period,
-            AccountLastTransactionDate
+            AccountLastTransactionDate,
+            AccountBalance
         } = Data;
         const AccountType = "L";
         // const AccountLastTransactionDate = getDateAndTime(); // Not used
@@ -96,8 +97,8 @@ exports.loanSave = (req, res) => {
 
                         // Insert client data to table
                         db.query(
-                            'INSERT INTO ledgerdetails (CustomerID, AccountType, LoanStartDate, InterestRate, Period, DueDate, LoanGuarantee1, LoanGuarantee2, IssuedLoanAmount, AccountLastTransactionDate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                            [CustomerID, AccountType, LoanStartDate, InterestRate, Period, DueDate, LoanGuarantee1, LoanGuarantee2, IssuedLoanAmount, AccountLastTransactionDate, ledgerID, AccountNumber],
+                            'INSERT INTO ledgerdetails (CustomerID, AccountType, LoanStartDate, InterestRate, Period, DueDate, LoanGuarantee1, LoanGuarantee2, IssuedLoanAmount, AccountLastTransactionDate, ledgerID, AccountNumber, AccountBalance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                            [CustomerID, AccountType, LoanStartDate, InterestRate, Period, DueDate, LoanGuarantee1, LoanGuarantee2, IssuedLoanAmount, AccountLastTransactionDate, ledgerID, AccountNumber, AccountBalance],
                             (error, result) => {
                                 if (error) {
                                     return res.status(500).json({ message: 'Server error, please try again later' });

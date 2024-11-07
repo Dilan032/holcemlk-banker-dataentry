@@ -8,7 +8,7 @@ exports.fixedDepositSave = (req, res) => {
         return res.status(400).json({ message: 'No data provided for insertion' });
     }
 
-    const requiredFields = ['PaidFDInterestAmount', 'InterestRate', 'Period', 'OpenDate', 'CustomerID', 'ledgerName'];
+    const requiredFields = ['AccountBalance', 'InterestRate', 'Period', 'OpenDate', 'CustomerID', 'ledgerName'];
     for (const field of requiredFields) {
         if (!Data[field]) {
             return res.status(400).json({ message: `Please provide the ${field}` });
@@ -19,6 +19,7 @@ exports.fixedDepositSave = (req, res) => {
         if (error) return res.status(500).json({ message: 'Server error, please try again later' });
         if (result.length === 0) return res.status(404).json({ message: 'Customer ID is incorrect' });
 
+        const AccountBalance = Data.CustomerID;
         const CustomerID = Data.CustomerID;
         const AccountType = "F";
         const InterestRate = Data.InterestRate;
@@ -60,8 +61,8 @@ exports.fixedDepositSave = (req, res) => {
                         if (result.length > 0) return res.status(400).json({ message: 'This customer has already paid for this product' });
 
                         db.query(
-                            'INSERT INTO ledgerdetails (CustomerID, AccountType, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?)',
-                            [CustomerID, AccountType, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber],
+                            'INSERT INTO ledgerdetails (AccountBalance, CustomerID, AccountType, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                            [AccountBalance, CustomerID, AccountType, InterestRate, AccountLastTransactionDate, ledgerID, AccountNumber],
                             (error, result) => {
                                 if (error) return res.status(500).json({ message: 'Server error, please try again later' });
                                 res.status(200).json({ message: 'Client details inserted successfully' });

@@ -37,3 +37,6 @@ To run backend
 
 ## show instituteList 
 - /instituteList 🙇‍♂️ |`post request`| Input is required -> `LedgerID` , `LedgerName`
+
+## search client name by entering client ID
+- /searchClient 🙇‍♂️ |`post request`| Input is required -> `CustomerID`

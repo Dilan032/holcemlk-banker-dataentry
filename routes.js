@@ -10,6 +10,7 @@ const fixedDepoLedgerNameController = require('./controllers/showDetails/fixedDe
 
 const customerTypeController = require('./controllers/showDetails/customerTypeController');
 const instituteListController = require('./controllers/showDetails/instituteListController');
+const searchClientIDforNameController = require('./controllers/showDetails/searchClientIDforNameController');
 
 
 
@@ -28,6 +29,9 @@ router.get('/CustomerType' ,customerTypeController.CustomerType);
 
 // showinstitute List
 router.post('/instituteList' ,instituteListController.instituteList);
+
+// search client ID for get client name
+router.post('/searchClient' , searchClientIDforNameController.searchClient)
 
 
 

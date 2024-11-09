@@ -31,7 +31,7 @@ router.get('/CustomerType' ,customerTypeController.CustomerType);
 router.post('/instituteList' ,instituteListController.instituteList);
 
 // search client ID for get client name
-router.post('/searchClient' , searchClientIDforNameController.searchClient)
+router.post('/searchClient' , searchClientIDforNameController.searchClient);
 
 
 

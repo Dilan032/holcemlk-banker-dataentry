@@ -86,13 +86,37 @@ exports.loanSave = (req, res) => {
                     const AccountNumber = `${ledgerID}-` + nextAccountNumber.toString().padStart(5, '0');
                     console.log("Generated AccountNumber:", AccountNumber); // Log for verification
 
-                    // Check for duplicate AccountNumber
-                    db.query('SELECT AccountNumber FROM ledgerdetails WHERE AccountNumber = ?', [AccountNumber], (error, result) => {
+                    // Check for LoanGuarantee1 avelable or not in DB
+                    db.query('SELECT CustomerID FROM customerinformation WHERE CustomerID = ?', [LoanGuarantee1], (error, result) => {
                         if (error) {
+                            console.log("LoanGuarantee2",error);
+                            
                             return res.status(500).json({ message: 'Server error, please try again later' });
                         }
-                        if (result.length > 0) {
-                            return res.status(400).json({ message: 'This customer has already paid for this product' });
+                        if (result.length === 0) {
+                            return res.status(400).json({ message: 'Loan Guarantee 1 not found' });
+                        }
+
+                        // Check for LoanGuarantee2 avelable or not in DB
+                    db.query('SELECT CustomerID FROM customerinformation WHERE CustomerID = ?', [LoanGuarantee2], (error, result) => {
+                        if (error) {
+                            console.log("LoanGuarantee1",error);
+                            
+                            return res.status(500).json({ message: 'Server error, please try again later' });
+                        }
+                        if (result.length === 0) {
+                            return res.status(400).json({ message: 'Loan Guarantee 2 not found' });
+                        }
+
+                        // check LoanGuarantee1 and LoanGuarantee2 equel or not
+                        // if it is equel send an error
+                        if(LoanGuarantee1 == LoanGuarantee2){
+                            return res.status(400).json({ message: 'Loan Guarantee should not be the same' });
+                        }
+
+                        // if it is equel send an error
+                        if(LoanGuarantee1 == CustomerID){
+                            return res.status(400).json({ message: 'Guarantee and CustomerID should not be the same' });
                         }
 
                         // Insert client data to table
@@ -106,7 +130,8 @@ exports.loanSave = (req, res) => {
                                 res.status(200).json({ message: 'Client details inserted successfully' });
                             }
                         );
-                    });
+                    }); // end Loan Guarantee 1 check query
+                    }); // end Loan Guarantee 2 check query
                 }
             );
         });

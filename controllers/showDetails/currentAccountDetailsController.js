@@ -6,7 +6,7 @@ exports.currentAccountDetails = (req, res) => {
     const inputLedgerID = data.LedgerID;
 
     db.query(
-        'SELECT * FROM ledgerdetails WHERE CustomerID = ? AND LedgerID = ?', [inputCustomerID, inputLedgerID], 
+        'SELECT AccountNumber, OpenDate, Period, InterestRate, AccountBalance FROM ledgerdetails WHERE CustomerID = ? AND LedgerID = ?', [inputCustomerID, inputLedgerID], 
         (error, result) => {
             if (error) {  
                 return res.status(500).json({ message: 'Server error, please try again later' });

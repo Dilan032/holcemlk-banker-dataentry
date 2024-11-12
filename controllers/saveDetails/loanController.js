@@ -121,8 +121,8 @@ exports.loanSave = (req, res) => {
 
                         // Insert client data to table
                         db.query(
-                            'INSERT INTO ledgerdetails (CustomerID, AccountType, LoanStartDate, InterestRate, Period, DueDate, LoanGuarantee1, LoanGuarantee2, IssuedLoanAmount, AccountLastTransactionDate, ledgerID, AccountNumber, AccountBalance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-                            [CustomerID, AccountType, LoanStartDate, InterestRate, Period, DueDate, LoanGuarantee1, LoanGuarantee2, IssuedLoanAmount, AccountLastTransactionDate, ledgerID, AccountNumber, AccountBalance],
+                            'INSERT INTO ledgerdetails (CustomerID, AccountType, LoanStartDate, OpenDate, InterestRate, Period, DueDate, LoanGuarantee1, LoanGuarantee2, IssuedLoanAmount, AccountLastTransactionDate, ledgerID, AccountNumber, AccountBalance) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                            [CustomerID, AccountType, LoanStartDate,LoanStartDate, InterestRate, Period, DueDate, LoanGuarantee1, LoanGuarantee2, IssuedLoanAmount, AccountLastTransactionDate, ledgerID, AccountNumber, AccountBalance],
                             (error, result) => {
                                 if (error) {
                                     return res.status(500).json({ message: 'Server error, please try again later' });

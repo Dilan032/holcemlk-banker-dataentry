@@ -10,7 +10,7 @@ exports.savingAccSave = (req, res) => {
     }
 
     // Validate required fields
-    const requiredFields = ['AccountBalance', 'InterestRate', 'CustomerID', 'ledgerName'];
+    const requiredFields = ['AccountBalance', 'InterestRate', 'CustomerID', 'ledgerName', 'OpenDate'];
     for (const field of requiredFields) {
         if (!Data[field]) {
             return res.status(400).json({ message: `Please provide the ${field}` });
@@ -25,7 +25,7 @@ exports.savingAccSave = (req, res) => {
         if (!customerExists) return res.status(404).json({ message: 'Client ID is incorrect' });
 
         // Initialize values
-        const { CustomerID, AccountBalance, InterestRate, ledgerName } = Data;
+        const { CustomerID, AccountBalance, InterestRate, ledgerName,OpenDate } = Data;
         const AccountType = "S";
         const AccountLastTransactionDate = getDateAndTime(); // Not used
 
@@ -62,8 +62,8 @@ exports.savingAccSave = (req, res) => {
 
                         // Insert client data into ledgerdetails table
                         db.query(
-                            'INSERT INTO ledgerdetails (CustomerID, AccountType, AccountBalance, InterestRate, ledgerID, AccountNumber) VALUES (?, ?, ?, ?, ?, ?)',
-                            [CustomerID, AccountType, AccountBalance, InterestRate, ledgerID, AccountNumber],
+                            'INSERT INTO ledgerdetails (CustomerID, AccountType, AccountBalance, InterestRate, ledgerID, AccountNumber,OpenDate) VALUES (?, ?, ?, ?, ?, ?, ?)',
+                            [CustomerID, AccountType, AccountBalance, InterestRate, ledgerID, AccountNumber, OpenDate],
                             (error, result) => {
                                 if (error) {
                                     return res.status(500).json({ message: 'Server error, please try again later' });

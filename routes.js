@@ -11,6 +11,7 @@ const fixedDepoLedgerNameController = require('./controllers/showDetails/fixedDe
 const customerTypeController = require('./controllers/showDetails/customerTypeController');
 const instituteListController = require('./controllers/showDetails/instituteListController');
 const searchClientIDforNameController = require('./controllers/showDetails/searchClientIDforNameController');
+const currentAccountDetailsController = require('./controllers/showDetails/currentAccountDetailsController');
 
 
 
@@ -32,6 +33,9 @@ router.post('/instituteList' ,instituteListController.instituteList);
 
 // search client ID for get client name
 router.post('/searchClient' , searchClientIDforNameController.searchClient);
+
+// show user current account details
+router.post('/currentAccountDetails' , currentAccountDetailsController.currentAccountDetails);
 
 
 

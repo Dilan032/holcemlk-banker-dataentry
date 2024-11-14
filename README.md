@@ -41,5 +41,5 @@ To run backend
 ## search client name by entering client ID
 - /searchClient 🙇‍♂️ |`post request`| Input is required -> `CustomerID`
 
-## search client name by entering client ID
+## Show Current Account Details
 - /currentAccountDetails 🙇‍♂️ |`post request`| Input is required -> `LedgerID` , `CustomerID`

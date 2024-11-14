@@ -5,6 +5,10 @@ exports.currentAccountDetails = (req, res) => {
     const inputCustomerID = data.CustomerID;
     const inputLedgerID = data.LedgerID;
 
+    if (!inputCustomerID || !inputLedgerID) {
+        return res.status(400).json({ message: 'CustomerID and LedgerID are required' });
+    }    
+
     db.query(
         'SELECT AccountNumber, OpenDate, Period, InterestRate, AccountBalance FROM ledgerdetails WHERE CustomerID = ? AND LedgerID = ?', [inputCustomerID, inputLedgerID], 
         (error, result) => {

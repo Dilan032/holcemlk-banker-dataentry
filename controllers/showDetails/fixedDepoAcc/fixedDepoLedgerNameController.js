@@ -1,7 +1,7 @@
 const db = require('../../../database');
 
 exports.fixedDepoLedgerName = (req, res) => {
-    db.query('SELECT LedgerName, LedgerID FROM ledgeraccounts WHERE AccountType = ?', ['F'], (error, result) => {
+    db.query('SELECT LedgerName, LedgerID FROM ledgeraccounts WHERE AccountType = ?', ['FD'], (error, result) => {
         if (error) {
             return res.status(500).json({ message: 'Server error, please try again later' });
         }

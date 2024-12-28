@@ -1,7 +1,7 @@
 const db = require('../../../database');
 
 exports.savingAccLedgerName = (req, res) => {
-    db.query('SELECT LedgerName, LedgerID FROM ledgeraccounts WHERE AccountType = ?', ['S'], (error, result) => {
+    db.query('SELECT LedgerName, LedgerID FROM ledgeraccounts WHERE AccountType = ? OR AccountType = ?', ['SV','IN'], (error, result) => {
         if (error) {
             return res.status(500).json({ message: 'Server error, please try again later' });
         }

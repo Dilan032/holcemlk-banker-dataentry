@@ -13,6 +13,10 @@ const instituteListController = require('./controllers/showDetails/instituteList
 const searchClientIDforNameController = require('./controllers/showDetails/searchClientIDforNameController');
 const currentAccountDetailsController = require('./controllers/showDetails/currentAccountDetailsController');
 
+const cusRegiController = require('./controllers/customer/cusRegiController');
+const cusInfoUpdateController = require('./controllers/customer/cusInfoUpdateController');
+const cusInforShowController = require('./controllers/customer/cusInforShowController');
+
 
 
 // save all data from client
@@ -37,6 +41,10 @@ router.post('/searchClient' , searchClientIDforNameController.searchClient);
 // show user current account details
 router.post('/currentAccountDetails' , currentAccountDetailsController.currentAccountDetails);
 
+// customer
+router.post('/customer-Register' ,cusRegiController.cusRegister);
+router.put('/customer-info-update' ,cusInfoUpdateController.cusInfoUpdate);
+router.get('/customer-info' ,cusInforShowController.cusInfoShow);
 
 
 // Export the router

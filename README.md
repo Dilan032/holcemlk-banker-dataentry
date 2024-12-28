@@ -1,7 +1,7 @@
 <h1 align="center"> holcemlk banker data entry back-end </h1>
 
 ## Node.js packages
-| `body-parser` | `dotenv` | `express` | `mysql2` |
+| `body-parser` | `dotenv` | `express` | `mysql2` | `nodemon` |
 
 <hr>
 
@@ -21,11 +21,11 @@ To run backend
 # End-points
 
 ## for save the client data
-- /savingAccSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `ledgerName` 
+- /savingAccSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `LedgerName` , `OpenDate`
   
-- /loanSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `ledgerName` , `LoanGuarantee1` , `LoanGuarantee2` , `Period` (int) , `IssuedLoanAmount` , `LoanStartDate` 
+- /loanSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `LedgerName` , `Period` (int) , `IssuedLoanAmount` , `LoanStartDate` , `HoldAmount` , `LoanAccountType ('GNL','PWN' OR 'FDL')` , `AccountLastTransactionDate `
 
-- /fixedDepositSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `ledgerName` , `PaidFDInterestAmount` , `InterestRate` , `Period` (int) , `OpenDate` 
+- /fixedDepositSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `LedgerName` ,  `InterestRate` , `Period` (int) , `OpenDate` , `AccountBalance`
 
 ## show Ledger Name list
 - /SavingLedgerName  🙇‍♂️ |`get request`|

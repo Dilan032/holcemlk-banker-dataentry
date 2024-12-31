@@ -5,7 +5,7 @@ exports.cusInfoUpdate = (req, res) => {
 
     // Check if client data is provided
     if (!Data || Object.keys(Data).length === 0) {
-        return res.status(400).json({ message: 'No data provided for insertion' });
+        return res.status(400).json({ message: 'No data provided for update' });
     }
 
     // Validate required fields
@@ -46,9 +46,10 @@ exports.cusInfoUpdate = (req, res) => {
         (error, result) => {
           if (error) {
             console.error('Error updating customer information:', error);
-            return;
+            return res.status(500).json({ message: 'Server error, please try again later' });
           }
           console.log('Customer information updated successfully:', result);
+          res.status(200).json({ message: 'Customer information update successfully' });
         }
       );
       

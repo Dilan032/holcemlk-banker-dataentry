@@ -45,14 +45,6 @@ exports.loanSave = (req, res) => {
             AccountBalance
         } = Data;
 
-        if (LoanAccountType === "FDL") {
-            if (!Data.HoldFDAccount) {
-                return res.status(400).json({ message: 'Please provide the HoldFDAccount' });
-            }
-            if (!Data.HoldAmount) {
-                return res.status(400).json({ message: 'Please provide the HoldAmount' });
-            }
-        }
         
         // const AccountLastTransactionDate = getDateAndTime(); // Not used
         // const FundAccount = null;
@@ -190,6 +182,7 @@ exports.loanSave = (req, res) => {
                             return res.status(500).json({ message: 'Server error, please try again later' });
                         }
                         if (LoanGuarantee3) {
+                            
                             if (result.length === 0) {
                                 return res.status(400).json({ message: 'LoanGuarantee3 not found' });
                             }

@@ -18,7 +18,7 @@ exports.searchClient = (req, res) => {
         if (LOAN_PERCENTAGE_result.length === 0) return res.status(404).json({ message: 'MAX_OBTAINABLE_FDADVANCE_LOAN_PERCENTAGE not found' });
 
         const LOAN_PERCENTAGE = LOAN_PERCENTAGE_result[0].MAX_OBTAINABLE_FDADVANCE_LOAN_PERCENTAGE;
-        // const HoldAmount = AccountBalance * 100 / LOAN_PERCENTAGE; 
+        // const HoldAmount = issu loan * 100 / LOAN_PERCENTAGE; 
         // HoldAmount calculate in frontend for FD_LOAN
 
 
@@ -52,28 +52,28 @@ exports.searchClient = (req, res) => {
                 return res.status(404).json({ message: 'Customer information not found' });
             }
 
-            // get ledger details
-            db.query(
-                'SELECT * FROM ledgerdetails WHERE CustomerID LIKE ?',
-                [`${inputCustomerID}%`],
-                (error, ledgerResult) => {
-                    if (error) {
-                        return res.status(500).json({ message: 'Server error, please try again later' });
-                    }
+            // // get ledger details
+            // db.query(
+            //     'SELECT FROM ledgerdetails WHERE CustomerID LIKE ?',
+            //     [`${inputCustomerID}%`],
+            //     (error, ledgerResult) => {
+            //         if (error) {
+            //             return res.status(500).json({ message: 'Server error, please try again later' });
+            //         }
 
-                    if (ledgerResult.length === 0) {
-                        return res.status(404).json({ message: 'Ledger details not found' });
-                    }
+            //         if (ledgerResult.length === 0) {
+            //             return res.status(404).json({ message: 'Ledger details not found' });
+            //         }
 
                     // Combine results
                     res.status(200).json({
                         LOAN_PERCENTAGE_FOR_FD: LOAN_PERCENTAGE_result,
                         FD_Account_Details: FDAccountDetailsResult,
                         customer_Information: customerResult,
-                        ledger_Details: ledgerResult,
+                        // ledger_Details: ledgerResult,
                     });
-                }
-            );
+            //     }
+            // );
          }); // end get customer FD ACCOUNT Details (if it is has)
          }); // end fetch MAX_OBTAINABLE_FDADVANCE_LOAN_PERCENTAGE
         }

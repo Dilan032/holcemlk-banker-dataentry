@@ -98,9 +98,9 @@ exports.cusRegister = (req, res) => {
         (error, result) => {
           if (error) {
             console.error('Error inserting customer information:', error);
-            return;
+            return res.status(500).json({ message: 'Server error, please try again later' });
           }
-        //   console.log('Customer information inserted successfully:', result);
+          console.log('Customer information inserted successfully:', result);
           res.status(200).json({ message: 'Customer information inserted successfully' });
         }
       );

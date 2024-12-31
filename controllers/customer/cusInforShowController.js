@@ -11,7 +11,7 @@ exports.cusInfoShow = (req, res) => {
     db.query('SELECT * FROM customerinformation WHERE CustomerID = ?', [cusID], (error, result) => {
         if (error) {
             console.error('Error getting customer information:', error);
-            return;
+            return res.status(500).json({ message: 'Server error, please try again later' });
         }
 
         if (result.length === 0) {

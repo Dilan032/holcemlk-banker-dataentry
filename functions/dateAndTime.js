@@ -1,4 +1,4 @@
-// function to get sri lankan date and time
+// function to get (Today's date and time in Sri Lanka Standard Time)
 const getDateAndTime = () =>{
 
     // Get the current date and time in UTC

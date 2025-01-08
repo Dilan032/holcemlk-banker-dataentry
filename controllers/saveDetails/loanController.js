@@ -12,7 +12,7 @@ exports.loanSave = (req, res) => {
     // Check request fields
     const requiredFields = [
         'HoldAmount', 'LoanAccountType','LoanStartDate', 'InterestRate', 'Period', 
-         'IssuedLoanAmount', 'CustomerID', 'LedgerName', 'AccountLastTransactionDate', 'AccountBalance'
+         'IssuedLoanAmount', 'CustomerID', 'LedgerName', 'AccountLastTransactionDate', 'AccountBalance', 'UserID'
     ];
 
     for (const field of requiredFields) {
@@ -112,7 +112,8 @@ exports.loanSave = (req, res) => {
             const PenaltyOrReservationAccount = result[0].PenaltyOrReservationAccount;
 
             const LoanApprovedDate = LoanStartDate;
-            const LoanApprovedBy = "01";
+            // login officer ID
+            const LoanApprovedBy = Data.UserID;
             const pawn_Reason = "-";
             const StationaryCharge = "-";
             const LoanReasonID = "-";

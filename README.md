@@ -1,13 +1,13 @@
 <h1 align="center"> holcemlk banker data entry back-end </h1>
 
 ## Node.js packages
-| `body-parser` | `dotenv` | `express` | `mysql2` | `nodemon` |
+| `body-parser` | `dotenv` | `express` | `mysql2` | `nodemon` | `MD5`
 
 <hr>
 
 Deploy backend
 - `npm init -y` 
-- `npm i body-parser dotenv express mysql2` 
+- `npm i body-parser dotenv express mysql2 MD5` 
 - create .env file and add database details
 
 <hr>
@@ -21,11 +21,11 @@ To run backend
 # End-points
 
 ## for save the client data
-- /savingAccSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `LedgerName` , `OpenDate`
+- /savingAccSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `LedgerName` , `OpenDate` , `UserID`
   
-- /loanSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `LedgerName` , `Period` (int) , `IssuedLoanAmount` , `LoanStartDate` , `HoldAmount` , `LoanAccountType ('GNL','PWN' OR 'FDL')` , `AccountLastTransactionDate `
+- /loanSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `AccountBalance` , `InterestRate` , `LedgerName` , `Period` (int) , `IssuedLoanAmount` , `LoanStartDate` , `HoldAmount` , `LoanAccountType ('GNL','PWN' OR 'FDL')` , `AccountLastTransactionDate ` , `UserID`
 
-- /fixedDepositSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `LedgerName` ,  `InterestRate` , `Period` (int) , `OpenDate` , `AccountBalance`
+- /fixedDepositSave 🙇‍♂️ |`post request`| Input is required -> `CustomerID` , `LedgerName` ,  `InterestRate` , `Period` (int) , `OpenDate` , `AccountBalance` , `UserID`
 
 ## show Ledger Name list
 - /SavingLedgerName  🙇‍♂️ |`get request`|
@@ -35,7 +35,7 @@ To run backend
 ## show Customer Type
 - /CustomerType 🙇‍♂️ |`get request`|
 
-## show instituteList 
+## show instituteList (requeried LedgerID)
 - /instituteList 🙇‍♂️ |`post request`| Input is required -> `LedgerID` , `LedgerName`
 
 ## search client name by entering client ID
@@ -43,3 +43,15 @@ To run backend
 
 ## Show Current Account Details
 - /currentAccountDetails 🙇‍♂️ |`post request`| Input is required -> `LedgerID` , `CustomerID`
+
+
+# customer reistration
+- /customer-Register 🙇‍♂️ |`post request`|
+- /customer-info-update 🙇‍♂️ |`put request`|
+- /customer-info 🙇‍♂️ |`get request`|
+
+## show all institute list without any user input
+- /allInstituteList 🙇‍♂️ |`get request`|
+
+## Authenticate
+- /login 🙇‍♂️ |`post request`| Input is required -> `UserName` , `web_password`

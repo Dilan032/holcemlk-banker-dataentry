@@ -10,7 +10,7 @@ exports.savingAccSave = (req, res) => {
     }
 
     // Validate required fields
-    const requiredFields = ['AccountBalance', 'InterestRate', 'CustomerID', 'LedgerName', 'OpenDate'];
+    const requiredFields = ['AccountBalance', 'InterestRate', 'CustomerID', 'LedgerName', 'OpenDate', 'UserID'];
     for (const field of requiredFields) {
         if (!Data[field]) {
             return res.status(400).json({ message: `Please provide the ${field}` });
@@ -27,8 +27,8 @@ exports.savingAccSave = (req, res) => {
         // Initialize values (1/2)
         const { CustomerID, AccountBalance, InterestRate, LedgerName, OpenDate } = Data;
 
-        // forine key in systemusers table "pass as null " reason = systemusers table have not in this database
-        const issued_field_officer = null;
+        // loging officer ID
+        const issued_field_officer = Data.UserID;
 
         const AccountType = "S";
         const AccountLastTransactionDate = getDateAndTime(); 

@@ -1,8 +1,13 @@
 const db = require('../../database');
 
-// Module for getting all Customer details
+// Get Institute List using user input LedgerID
 exports.instituteList = (req, res) => {
     const ledgeraccount = req.body; // Get user input from user
+
+    // Check if LedgerID is provided
+    if ( ledgeraccount.LedgerID === undefined || ledgeraccount.LedgerID === null ) {
+        return res.status(400).json({ message: 'Please provide LedgerID' });
+    }
 
     // Get InstituteID
     db.query('SELECT InstituteID FROM ledgeraccounts WHERE LedgerID = ?', [ledgeraccount.LedgerID], (error, result) => {

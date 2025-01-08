@@ -9,7 +9,7 @@ exports.fixedDepositSave = (req, res) => {
 
     }
 
-    const requiredFields = ['AccountBalance', 'InterestRate', 'Period', 'OpenDate', 'CustomerID', 'LedgerName'];
+    const requiredFields = ['AccountBalance', 'InterestRate', 'Period', 'OpenDate', 'CustomerID', 'LedgerName', 'UserID'];
     for (const field of requiredFields) {
         if (!Data[field]) {
             return res.status(400).json({ message: `Please provide the ${field}` });
@@ -21,8 +21,8 @@ exports.fixedDepositSave = (req, res) => {
         if (result.length === 0) return res.status(404).json({ message: 'Customer ID is incorrect' });
 
         // Initialize (1/4)
-        // forine key in systemusers table "pass as null " reason = systemusers table have not in this database
-        const issued_field_officer = null;
+        // loging officer id
+        const issued_field_officer = Data.UserID;
 
         const OpenDate = Data.OpenDate;
         const Period = Data.Period;

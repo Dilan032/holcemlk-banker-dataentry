@@ -17,7 +17,16 @@ const cusRegiController = require('./controllers/customer/cusRegiController');
 const cusInfoUpdateController = require('./controllers/customer/cusInfoUpdateController');
 const cusInforShowController = require('./controllers/customer/cusInforShowController');
 const allInstituteListController = require('./controllers/customer/allInstituteListController');
+
 const loginController = require('./controllers/auth/loginController');
+const GSDivisionNoListController = require('./controllers/customer/GSDivisionNoListController');
+const GSDivisionNameListController = require('./controllers/customer/GSDivisionNameListController');
+const AGDivisionListController = require('./controllers/customer/AGDivisionListController');
+const DistrictListController = require('./controllers/customer/DistrictListController');
+const ReligionListController = require('./controllers/customer/ReligionListController');
+
+// get name and number of GSDivision
+const GSDivisionListController = require('./controllers/customer/GSDivisionListController');
 
 // login
 router.post('/login', loginController.login);
@@ -49,8 +58,17 @@ router.post('/customer-Register' ,cusRegiController.cusRegister);
 router.put('/customer-info-update' ,cusInfoUpdateController.cusInfoUpdate);
 router.get('/customer-info' ,cusInforShowController.cusInfoShow);
 
+//List
 // show all institute list without any user input
 router.get('/allInstituteList' ,allInstituteListController.allInstituteList);
+router.get('/GSDivisionNoList' ,GSDivisionNoListController.GSDivisionNoList);
+router.get('/GSDivisionNameList' ,GSDivisionNameListController.GSDivisionNameList);
+router.get('/AGDivisionList' ,AGDivisionListController.AGDivisionList);
+router.get('/DistrictList' ,DistrictListController.DistrictList);
+router.get('/ReligionList' ,ReligionListController.ReligionList);
+
+// get name and number of GSDivision
+router.get('/GSDivisionList' ,GSDivisionListController.GSDivisionList);
 
 
 // Export the router

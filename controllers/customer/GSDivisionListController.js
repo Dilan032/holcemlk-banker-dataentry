@@ -1,0 +1,20 @@
+const db = require('../../database');
+
+exports.GSDivisionList = (req, res) => {
+    db.query(
+        'SELECT GSDivisionNo, GSDivisionName FROM customerinformationprerequisite WHERE GSDivisionName IS NOT NULL AND GSDivisionNo IS NOT NULL',
+        (error, result) => {
+            if (error) {
+                console.error(error);
+                return res.status(500).json({ message: 'Server error, please try again later' });
+            }
+
+            if (result.length === 0) {
+                return res.status(404).json({ message: 'GSDivision list not found' });
+            }
+
+            // Return GSDivision list
+            res.status(200).json(result);
+        }
+    );
+};

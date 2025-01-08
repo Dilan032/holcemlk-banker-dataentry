@@ -55,3 +55,13 @@ To run backend
 
 ## Authenticate
 - /login 🙇‍♂️ |`post request`| Input is required -> `UserName` , `web_password`
+
+## List for cus register
+- GSDivisionNoList 🙇‍♂️ |`get request`|
+- GSDivisionNameList 🙇‍♂️ |`get request`|
+- AGDivisionList 🙇‍♂️ |`get request`|
+- DistrictList 🙇‍♂️ |`get request`|
+- ReligionList 🙇‍♂️ |`get request`|
+
+// get name and number of GSDivision
+- GSDivisionList 🙇‍♂️ |`get request`|

@@ -19,14 +19,14 @@ const cusInforShowController = require('./controllers/customer/cusInforShowContr
 const allInstituteListController = require('./controllers/customer/allInstituteListController');
 
 const loginController = require('./controllers/auth/loginController');
-const GSDivisionNoListController = require('./controllers/customer/GSDivisionNoListController');
-const GSDivisionNameListController = require('./controllers/customer/GSDivisionNameListController');
-const AGDivisionListController = require('./controllers/customer/AGDivisionListController');
-const DistrictListController = require('./controllers/customer/DistrictListController');
-const ReligionListController = require('./controllers/customer/ReligionListController');
+const GSDivisionNoListController = require('./controllers/customer/dropDown/GSDivisionNoListController');
+const GSDivisionNameListController = require('./controllers/customer/dropDown/GSDivisionNameListController');
+const AGDivisionListController = require('./controllers/customer/dropDown/AGDivisionListController');
+const DistrictListController = require('./controllers/customer/dropDown/DistrictListController');
+const ReligionListController = require('./controllers/customer/dropDown/ReligionListController');
 
 // get name and number of GSDivision
-const GSDivisionListController = require('./controllers/customer/GSDivisionListController');
+const GSDivisionListController = require('./controllers/customer/dropDown/GSDivisionListController');
 
 // login
 router.post('/login', loginController.login);

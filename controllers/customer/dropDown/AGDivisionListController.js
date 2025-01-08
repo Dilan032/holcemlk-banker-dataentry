@@ -1,15 +1,15 @@
-const db = require('../../database');
+const db = require('../../../database');
 
-exports.DistrictList = (req, res) => {
+exports.AGDivisionList = (req, res) => {
 
-    db.query('SELECT District FROM customerinformationprerequisite WHERE District IS NOT NULL', (error, result) => {
+    db.query('SELECT AGDivision FROM customerinformationprerequisite WHERE AGDivision IS NOT NULL', (error, result) => {
         if (error) {
             console.error(error);
             return res.status(500).json({ message: 'Server error, please try again later' });
         }
 
         if (result.length === 0) {
-            return res.status(404).json({ message: 'District list not found' });
+            return res.status(404).json({ message: 'AGDivision Name list not found' });
         }
 
         // Return GSDivisionNo list

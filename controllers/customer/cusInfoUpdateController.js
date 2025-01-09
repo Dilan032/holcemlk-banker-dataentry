@@ -20,6 +20,8 @@ exports.cusInfoUpdate = (req, res) => {
     }
 
     // initialize variables
+    const NameInInitials = Data.NameInInitials || null;
+    const BusinessMobileNo = Data.BusinessMobileNo || null;
     const customerID = Data.customerID; 
     const customerType = Data.customerType; 
     const customerTitle = Data.customerTitle;
@@ -126,7 +128,7 @@ exports.cusInfoUpdate = (req, res) => {
     db.query(
         `UPDATE customerinformation 
          SET 
-            CustomerType = ?, CustomerTitle = ?, GroupCode = ?, SubGroupCode = ?, CustomerName = ?, 
+            NameInInitials = ?, BusinessMobileNo = ?, CustomerType = ?, CustomerTitle = ?, GroupCode = ?, SubGroupCode = ?, CustomerName = ?, 
             CustomerFullName = ?, HomeNo = ?, HomeStreet = ?, HomeTown = ?, HomeCountry = ?, 
             BussinessLocationNo = ?, BusinessStreet = ?, BussinessTown = ?, BussinessName = ?, 
             ImportantNote = ?, BirthDay = ?, NIC = ?, Sex = ?, PersonnalTelephoneNo = ?, 
@@ -139,7 +141,7 @@ exports.cusInfoUpdate = (req, res) => {
             ReferenceNumber = ?, InstituteId = ?, FPEnrollID = ?
          WHERE CustomerID = ?`,
         [
-          customerType, customerTitle, groupCode, subGroupCode, customerName,
+         NameInInitials, BusinessMobileNo, customerType, customerTitle, groupCode, subGroupCode, customerName,
           customerFullName, homeNo, homeStreet, homeTown, homeCountry, businessLocationNo,
           businessStreet, businessTown, businessName, importantNote, birthDay, nic, sex,
           personnalTelephoneNo, personnalMobileNo, personnalEMail, homeTelephoneNo,

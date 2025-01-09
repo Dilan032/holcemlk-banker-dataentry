@@ -18,6 +18,8 @@ exports.cusRegister = (req, res) => {
 
     // initialize variables
     // customerID = Data.customerID; 
+    const NameInInitials = Data.NameInInitials || null;
+    const BusinessMobileNo = Data.BusinessMobileNo || null;
     const customerType = Data.customerType; 
     const customerTitle = Data.customerTitle;
     const referenceNumber = Data.referenceNumber;
@@ -154,7 +156,7 @@ exports.cusRegister = (req, res) => {
     db.query(
         `INSERT INTO customerinformation 
         (
-          CustomerType, CustomerTitle, CustomerID, GroupCode, SubGroupCode, CustomerName, 
+          NameInInitials, BusinessMobileNo, CustomerType, CustomerTitle, CustomerID, GroupCode, SubGroupCode, CustomerName, 
           CustomerFullName, HomeNo, HomeStreet, HomeTown, HomeCountry, BussinessLocationNo, 
           BusinessStreet, BussinessTown, BussinessName, ImportantNote, BirthDay, NIC, Sex, 
           PersonnalTelephoneNo, PersonnalMobileNo, PersonnalEMail, HomeTelephoneNo, 
@@ -164,9 +166,9 @@ exports.cusRegister = (req, res) => {
           MaritalStatus, CustomerAddress, sCustomerAddress, BussinessAddress, BeneficiaryNIC, 
           Occupation, ReferenceNumber, InstituteId, FPEnrollID
         ) 
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
-          customerType, customerTitle, customerID, groupCode, subGroupCode, customerName,
+          NameInInitials, BusinessMobileNo, customerType, customerTitle, customerID, groupCode, subGroupCode, customerName,
           customerFullName, homeNo, homeStreet, homeTown, homeCountry, businessLocationNo,
           businessStreet, businessTown, businessName, importantNote, birthDay, nic, sex,
           personnalTelephoneNo, personnalMobileNo, personnalEMail, homeTelephoneNo,

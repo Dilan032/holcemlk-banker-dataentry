@@ -18,22 +18,22 @@ exports.cusRegister = (req, res) => {
 
     // initialize variables
     // customerID = Data.customerID; 
-    customerType = Data.customerType; 
-    customerTitle = Data.customerTitle;
-    referenceNumber = Data.referenceNumber;
-    groupCode = Data.groupCode;
-    customerName = Data.customerName;
-    customerFullName = Data.customerFullName; 
-    homeNo = Data.homeNo;
-    birthDay = Data.birthDay;
-    nic = Data.nic;
-    sex = Data.sex;
-    joinedDate = Data.joinedDate;
-    sCustomerTitle = Data.sCustomerTitle;
-    sCustomerName = Data.sCustomerName;
-    sCustomerFullName = Data.sCustomerFullName;
-    sHomeNo = Data.sHomeNo;
-    beneficiaryNIC = Data.beneficiaryNIC;
+    const customerType = Data.customerType; 
+    const customerTitle = Data.customerTitle;
+    const referenceNumber = Data.referenceNumber;
+    const groupCode = Data.groupCode;
+    const customerName = Data.customerName;
+    const customerFullName = Data.customerFullName; 
+    const homeNo = Data.homeNo;
+    const birthDay = Data.birthDay;
+    const nic = Data.nic;
+    const sex = Data.sex;
+    const joinedDate = Data.joinedDate;
+    const sCustomerTitle = Data.sCustomerTitle;
+    const sCustomerName = Data.sCustomerName;
+    const sCustomerFullName = Data.sCustomerFullName;
+    const sHomeNo = Data.sHomeNo;
+    const beneficiaryNIC = Data.beneficiaryNIC;
 
     const subGroupCode = Data.SubGroupCode || null;
     const homeStreet = Data.homeStreet || null;
@@ -66,37 +66,40 @@ exports.cusRegister = (req, res) => {
     const instituteId = Data.instituteId || null;
     const fpEnrollID = Data.fpEnrollID || null;
 
+    let customerAddress = " ";
     // Create customer address
     if (homeNo && homeStreet && homeTown) {
-      customerAddress = homeNo + ', ' + homeStreet + ', ' + homeTown + '. ';
+       customerAddress = homeNo + ',' + homeStreet + ',' + homeTown + '. ';
     } else if (homeNo && homeStreet) {
-      customerAddress = homeNo + ', ' + homeStreet + '. ';
+       customerAddress = homeNo + ',' + homeStreet + '. ';
     } else if (homeNo && homeTown) {
-      customerAddress = homeNo + ', ' + homeTown + '. ';
+       customerAddress = homeNo + ',' + homeTown + '. ';
     } else if (homeNo) {
-      customerAddress = homeNo + '. ';
+       customerAddress = homeNo + '. ';
     }
 
+    let sCustomerAddress = " ";
     // Create sCustomer address
     if (sHomeNo && sHomeStreet && sHomeTown) {
-      sCustomerAddress = sHomeNo + ', ' + sHomeStreet + ', ' + sHomeTown + '. ';
+       sCustomerAddress = sHomeNo + ',' + sHomeStreet + ',' + sHomeTown + '. ';
     } else if (sHomeNo && sHomeStreet) { 
-      sCustomerAddress = sHomeNo + ', ' + sHomeStreet + '. ';
+       sCustomerAddress = sHomeNo + ',' + sHomeStreet + '. ';
     } else if (sHomeNo && sHomeTown) {
-      sCustomerAddress = sHomeNo + ', ' + sHomeTown + '. ';
+       sCustomerAddress = sHomeNo + ',' + sHomeTown + '. ';
     } else if (sHomeNo) {
-      sCustomerAddress = sHomeNo + '. ';
+       sCustomerAddress = sHomeNo + '. ';
     }
 
+    let businessAddress = " ";
     // Create business address
     if (businessLocationNo && businessStreet && businessTown) {
-      businessAddress = businessLocationNo + ', ' + businessStreet + ', ' + businessTown + '. ';
+       businessAddress = businessLocationNo + ',' + businessStreet + ',' + businessTown + '. ';
     } else if (businessLocationNo && businessStreet) {
-      businessAddress = businessLocationNo + ', ' + businessStreet + '. ';
+       businessAddress = businessLocationNo + ',' + businessStreet + '. ';
     } else if (businessLocationNo && businessTown) {
-      businessAddress = businessLocationNo + ', ' + businessTown + '. ';
+       businessAddress = businessLocationNo + ',' + businessTown + '. ';
     } else if (businessLocationNo) {
-      businessAddress = businessLocationNo + '. ';
+       businessAddress = businessLocationNo + '. ';
     }
 
     // Generate customerID (xx-xx-xxxxx) 

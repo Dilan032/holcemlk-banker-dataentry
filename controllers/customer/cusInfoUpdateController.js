@@ -9,7 +9,7 @@ exports.cusInfoUpdate = (req, res) => {
     }
 
     // Validate required fields
-    const requiredFields = ['customerID', 'customerType', 'customerTitle', 'referenceNumber', 'groupCode', 'customerName', 'customerFullName'
+    const requiredFields = ['CustomerID', 'customerType', 'customerTitle', 'referenceNumber', 'groupCode', 'customerName', 'customerFullName'
       , 'homeNo', 'birthDay', 'nic', 'sex', 'joinedDate', 'sCustomerTitle', 
       'sCustomerName', 'sCustomerFullName', 'sHomeNo', 'beneficiaryNIC'];
 
@@ -22,7 +22,7 @@ exports.cusInfoUpdate = (req, res) => {
     // initialize variables
     const NameInInitials = Data.NameInInitials || null;
     const BusinessMobileNo = Data.BusinessMobileNo || null;
-    const customerID = Data.customerID; 
+    const customerID = Data.CustomerID; 
     const customerType = Data.customerType; 
     const customerTitle = Data.customerTitle;
     const referenceNumber = Data.referenceNumber;

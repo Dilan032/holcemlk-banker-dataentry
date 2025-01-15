@@ -46,9 +46,10 @@ To run backend
 
 
 # customer reistration
-- /customer-Register 🙇‍♂️ |`post request`|
-- /customer-info-update 🙇‍♂️ |`put request`|
-- /customer-info 🙇‍♂️ |`get request`|
+- /customer-Register 🙇‍♂️ |`post request`| Input is required -> customerType', 'customerTitle', 'referenceNumber', 'groupCode', 'customerName', 'customerFullName', 'homeNo', 'birthDay', 'nic', 'sex', 'joinedDate', 'sCustomerTitle', 'sCustomerName', 'sCustomerFullName', 'sHomeNo', 'beneficiaryNIC'
+
+- /customer-info-update 🙇‍♂️ |`put request`| Input is required -> CustomerID
+- /customer-info 🙇‍♂️ |`get request`| | Input is required -> CustomerID
 
 ## show all institute list without any user input
 - /allInstituteList 🙇‍♂️ |`get request`|
@@ -57,11 +58,16 @@ To run backend
 - /login 🙇‍♂️ |`post request`| Input is required -> `UserName` , `web_password`
 
 ## List for cus register
-- /GSDivisionNoList 🙇‍♂️ |`get request`|
-- /GSDivisionNameList 🙇‍♂️ |`get request`|
 - /AGDivisionList 🙇‍♂️ |`get request`|
 - /DistrictList 🙇‍♂️ |`get request`|
 - /ReligionList 🙇‍♂️ |`get request`|
+
+for GSDivision
+// get number of GSDivision
+- /GSDivisionNoList 🙇‍♂️ |`get request`|
+
+// get name of GSDivision
+- /GSDivisionNameList 🙇‍♂️ |`get request`|
 
 // get name and number of GSDivision
 - /GSDivisionList 🙇‍♂️ |`get request`|

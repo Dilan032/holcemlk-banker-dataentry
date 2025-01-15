@@ -46,7 +46,7 @@ To run backend
 
 
 # customer reistration
-- /customer-Register 🙇‍♂️ |`post request`| Input is required -> customerType', 'customerTitle', 'referenceNumber', 'groupCode', 'customerName', 'customerFullName', 'homeNo', 'birthDay', 'nic', 'sex', 'joinedDate', 'sCustomerTitle', 'sCustomerName', 'sCustomerFullName', 'sHomeNo', 'beneficiaryNIC'
+- /customer-Register 🙇‍♂️ |`post request`| Input is required -> `customerType`, `customerTitle`, `referenceNumber`, `groupCode`, `customerName`, `customerFullName`, `homeNo`, `birthDay`, `nic`, `sex`, `joinedDate`, `sCustomerTitle`, `sCustomerName`, `sCustomerFullName`, `sHomeNo`, `beneficiaryNIC`
 
 - /customer-info-update 🙇‍♂️ |`put request`| Input is required -> CustomerID
 - /customer-info 🙇‍♂️ |`get request`| | Input is required -> CustomerID
@@ -62,8 +62,8 @@ To run backend
 - /DistrictList 🙇‍♂️ |`get request`|
 - /ReligionList 🙇‍♂️ |`get request`|
 
-for GSDivision
-// get number of GSDivision
+for GSDivision 👇<br> <br>
+// get number of GSDivision 
 - /GSDivisionNoList 🙇‍♂️ |`get request`|
 
 // get name of GSDivision

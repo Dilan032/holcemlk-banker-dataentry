@@ -9,7 +9,7 @@ exports.cusRegister = (req, res) => {
     }
 
     // Validate required fields
-    const requiredFields = ['customerType', 'customerTitle', 'referenceNumber', 'groupCode', 'customerName', 'customerFullName', 'homeNo', 'birthDay', 'nic', 'sex', 'joinedDate', 'sCustomerTitle', 'sCustomerName', 'sCustomerFullName', 'sHomeNo', 'beneficiaryNIC'];
+    const requiredFields = ['memberStatus', 'instituteId', 'customerType', 'customerTitle', 'groupCode', 'customerName', 'customerFullName', 'homeNo', 'birthDay', 'nic', 'sex', 'joinedDate', 'sCustomerTitle', 'sCustomerName', 'sCustomerFullName', 'sHomeNo', 'beneficiaryNIC'];
     for (const field of requiredFields) {
         if (!Data[field]) {
             return res.status(400).json({ message: `Please provide the ${field}` });
@@ -18,11 +18,12 @@ exports.cusRegister = (req, res) => {
 
     // initialize variables
     // customerID = Data.customerID; 
+    const instituteId = Data.instituteId;
     const NameInInitials = Data.NameInInitials || null;
     const BusinessMobileNo = Data.BusinessMobileNo || null;
     const customerType = Data.customerType; 
     const customerTitle = Data.customerTitle;
-    const referenceNumber = Data.referenceNumber;
+    const referenceNumber = Data.referenceNumber || null;
     const groupCode = Data.groupCode;
     const customerName = Data.customerName;
     const customerFullName = Data.customerFullName; 
@@ -62,10 +63,9 @@ exports.cusRegister = (req, res) => {
     const maritalStatus = Data.maritalStatus || null;
     const sHomeStreet = Data.sHomeStreet || null;
     const sHomeTown = Data.sHomeTown || null;
-    const memberStatus = Data.memberStatus || null;
+    const memberStatus = Data.memberStatus ;
     const occupation = Data.occupation || null;
     // const referenceNumber = Data.referenceNumber || null;
-    const instituteId = Data.instituteId || null;
     const fpEnrollID = Data.fpEnrollID || null;
 
     let customerAddress = " ";

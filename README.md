@@ -62,8 +62,8 @@ To run backend
 - /DistrictList 🙇‍♂️ |`get request`|
 - /ReligionList 🙇‍♂️ |`get request`|
 
-for GSDivision
-// get number of GSDivision
+for GSDivision 👇<br> <br>
+// get number of GSDivision 
 - /GSDivisionNoList 🙇‍♂️ |`get request`|
 
 // get name of GSDivision

@@ -61,6 +61,7 @@ To run backend
 - /AGDivisionList 🙇‍♂️ |`get request`|
 - /DistrictList 🙇‍♂️ |`get request`|
 - /ReligionList 🙇‍♂️ |`get request`|
+- /GroupCodeDetails 🙇‍♂️ |`get request`|
 
 for GSDivision 👇<br> <br>
 // get number of GSDivision 

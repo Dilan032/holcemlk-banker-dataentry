@@ -24,6 +24,7 @@ const GSDivisionNameListController = require('./controllers/customer/dropDown/GS
 const AGDivisionListController = require('./controllers/customer/dropDown/AGDivisionListController');
 const DistrictListController = require('./controllers/customer/dropDown/DistrictListController');
 const ReligionListController = require('./controllers/customer/dropDown/ReligionListController');
+const GroupCodeController = require('./controllers/customer/dropDown/GroupCodeController');
 
 // get name and number of GSDivision
 const GSDivisionListController = require('./controllers/customer/dropDown/GSDivisionListController');
@@ -61,14 +62,18 @@ router.get('/customer-info' ,cusInforShowController.cusInfoShow);
 //List
 // show all institute list without any user input
 router.get('/allInstituteList' ,allInstituteListController.allInstituteList);
+
 router.get('/GSDivisionNoList' ,GSDivisionNoListController.GSDivisionNoList);
 router.get('/GSDivisionNameList' ,GSDivisionNameListController.GSDivisionNameList);
+// get name and number of GSDivision
+router.get('/GSDivisionList' ,GSDivisionListController.GSDivisionList);
+
 router.get('/AGDivisionList' ,AGDivisionListController.AGDivisionList);
 router.get('/DistrictList' ,DistrictListController.DistrictList);
 router.get('/ReligionList' ,ReligionListController.ReligionList);
+router.get('/GroupCodeDetails' ,GroupCodeController.GroupCodeDetails);
 
-// get name and number of GSDivision
-router.get('/GSDivisionList' ,GSDivisionListController.GSDivisionList);
+
 
 
 // Export the router

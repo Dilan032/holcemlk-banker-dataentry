@@ -35,8 +35,6 @@ To run backend
 ## show Customer Type
 - /CustomerType 🙇‍♂️ |`get request`|
 
-## show instituteList (requeried LedgerID)
-- /instituteList 🙇‍♂️ |`post request`| Input is required -> `LedgerID` , `LedgerName`
 
 ## search client name by entering client ID
 - /searchClient 🙇‍♂️ |`post request`| Input is required -> `CustomerID`
@@ -50,6 +48,9 @@ To run backend
 
 - /customer-info-update 🙇‍♂️ |`put request`| Input is required -> CustomerID
 - /customer-info 🙇‍♂️ |`get request`| | Input is required -> CustomerID
+
+## show instituteList (requeried LedgerID)
+- /instituteList 🙇‍♂️ |`post request`| Input is required -> `LedgerID` 
 
 ## show all institute list without any user input
 - /allInstituteList 🙇‍♂️ |`get request`|
@@ -72,3 +73,6 @@ for GSDivision 👇<br> <br>
 
 // get name and number of GSDivision
 - /GSDivisionList 🙇‍♂️ |`get request`|
+
+# Get Generate New Acccount Number
+-/getNextAccountNum 🙇‍♂️ |`get request`| Input is required -> `LedgerID` 

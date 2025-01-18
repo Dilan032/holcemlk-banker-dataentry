@@ -26,6 +26,8 @@ const DistrictListController = require('./controllers/customer/dropDown/District
 const ReligionListController = require('./controllers/customer/dropDown/ReligionListController');
 const GroupCodeController = require('./controllers/customer/dropDown/GroupCodeController');
 
+const getNextAccountNumController = require('./controllers/showDetails/getNextAccountNumController');
+
 // get name and number of GSDivision
 const GSDivisionListController = require('./controllers/customer/dropDown/GSDivisionListController');
 
@@ -45,8 +47,6 @@ router.get('/fixedDepoLedgerName' ,fixedDepoLedgerNameController.fixedDepoLedger
 // show Customer Type
 router.get('/CustomerType' ,customerTypeController.CustomerType);
 
-// showinstitute List (requeried LedgerID)
-router.post('/instituteList' ,instituteListController.instituteList);
 
 // search client ID for get client name
 router.post('/searchClient' , searchClientIDforNameController.searchClient);
@@ -59,19 +59,29 @@ router.post('/customer-Register' ,cusRegiController.cusRegister);
 router.put('/customer-info-update' ,cusInfoUpdateController.cusInfoUpdate);
 router.get('/customer-info' ,cusInforShowController.cusInfoShow);
 
-//List
+//Lists
+// show institute List (requeried LedgerID)
+router.post('/instituteList' ,instituteListController.instituteList);
+
 // show all institute list without any user input
 router.get('/allInstituteList' ,allInstituteListController.allInstituteList);
 
+
+// these 3 end points are for GSDivision, chose one of them
 router.get('/GSDivisionNoList' ,GSDivisionNoListController.GSDivisionNoList);
 router.get('/GSDivisionNameList' ,GSDivisionNameListController.GSDivisionNameList);
 // get name and number of GSDivision
 router.get('/GSDivisionList' ,GSDivisionListController.GSDivisionList);
 
+
+
 router.get('/AGDivisionList' ,AGDivisionListController.AGDivisionList);
 router.get('/DistrictList' ,DistrictListController.DistrictList);
 router.get('/ReligionList' ,ReligionListController.ReligionList);
 router.get('/GroupCodeDetails' ,GroupCodeController.GroupCodeDetails);
+
+// get generate next account number 
+router.get('/getNextAccountNum' ,getNextAccountNumController.getNextAccountNum);
 
 
 

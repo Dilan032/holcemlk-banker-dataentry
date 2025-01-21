@@ -49,11 +49,8 @@ To run backend
 - /customer-info-update 🙇‍♂️ |`put request`| Input is required -> CustomerID
 - /customer-info 🙇‍♂️ |`get request`| | Input is required -> CustomerID
 
-## show instituteList (requeried LedgerID)
-- /instituteList 🙇‍♂️ |`post request`| Input is required -> `LedgerID` 
-
-## show all institute list without any user input
-- /allInstituteList 🙇‍♂️ |`get request`|
+## show instituteList
+- /instituteList 🙇‍♂️ |`get request`
 
 ## Authenticate
 - /login 🙇‍♂️ |`post request`| Input is required -> `UserName` , `web_password`

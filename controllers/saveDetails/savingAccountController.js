@@ -89,37 +89,7 @@ exports.savingAccSave = (req, res) => {
             const DueDate = null;
             const InterestPolicy = result[0].InterestPolicy;
 
-    
-
-            // Generate next AccountNumber based on maxAccountNumber
-            db.query(
-                `SELECT MAX(CAST(RIGHT(AccountNumber, 5) AS UNSIGNED)) AS maxAccountNumber 
-                 FROM ledgerdetails WHERE LedgerID = ?`,
-                [ledgerID],
-                (error, result) => {
-                    if (error) return res.status(500).json({ message: 'Server error, please try again later' });
-
-                    let nextAccountNumber = (result[0].maxAccountNumber || 0) + 1;
-                    if (nextAccountNumber > 99999) {
-                        return res.status(400).json({ message: 'Account number limit reached' });
-                    }
-
-                    const AccountNumber = `${ledgerID}-` + nextAccountNumber.toString().padStart(5, '0');
-                    console.log("Generate Acc Num: ",AccountNumber);
-                    
-                    // Check for duplicate AccountNumber 
-                    db.query('SELECT AccountNumber FROM ledgerdetails WHERE AccountNumber = ?', [AccountNumber], (error, result) => {
-                        if (error) return res.status(500).json(
-                            { message: 'Server error, please try again later', error }
-                        );
-                        
-                        if (result.length > 0) {
-                            console.log(result);
-                            return res.status(400).json(
-                                { message: 'This customer has already paid for this product' }
-                        );   
-                        }
-
+            
                     // Check for JointAccountHolder 1 avelable or not in DB
                     db.query('SELECT CustomerID FROM customerinformation WHERE CustomerID = ?', [JointAccountHolder1], (error, result) => {
                         if (error) {
@@ -176,6 +146,35 @@ exports.savingAccSave = (req, res) => {
                                 return res.status(400).json({ message: 'JointAccountHolder 2 is same as JointAccountHolder 3' });
                             }
                         }
+
+                        // Generate next AccountNumber based on maxAccountNumber
+            db.query(
+                `SELECT MAX(CAST(RIGHT(AccountNumber, 5) AS UNSIGNED)) AS maxAccountNumber 
+                 FROM ledgerdetails WHERE LedgerID = ?`,
+                [ledgerID],
+                (error, result) => {
+                    if (error) return res.status(500).json({ message: 'Server error, please try again later' });
+
+                    let nextAccountNumber = (result[0].maxAccountNumber || 0) + 1;
+                    if (nextAccountNumber > 99999) {
+                        return res.status(400).json({ message: 'Account number limit reached' });
+                    }
+
+                    const AccountNumber = `${ledgerID}-` + nextAccountNumber.toString().padStart(5, '0');
+                    console.log("Generate Acc Num: ",AccountNumber);
+                    
+                    // Check for duplicate AccountNumber 
+                    db.query('SELECT AccountNumber FROM ledgerdetails WHERE AccountNumber = ?', [AccountNumber], (error, result) => {
+                        if (error) return res.status(500).json(
+                            { message: 'Server error, please try again later', error }
+                        );
+                        
+                        if (result.length > 0) {
+                            console.log(result);
+                            return res.status(400).json(
+                                { message: 'This customer has already paid for this product' }
+                        );   
+                        }
                         
 
                         // Insert client data into ledgerdetails table
@@ -193,7 +192,7 @@ exports.savingAccSave = (req, res) => {
                                     issued_field_officer, ledgerID, AccountNumber, CustomerID, InterestAccount, PenaltyOrReservationAccount, FundAccount, DepriciationAccount, DebitAmount, CreditAmount, MinimumAccountBalance, LowestAccountBalance, HoldAmount, HoldDescription, Period, OpenDate, DueDate, LoanStartDate, LoanFreeTime, InterestPolicy, InterestRate, InterestAmount, DueInterestAmount, ReservedInterest, PenaltyInterestPolicy, PenaltyRate, PenaltyInterestAmount, DepriciationPolicy, DepriciationRate, RequestedLoanAmount, ApprovedLoanAmount, JointAccountHolder1, JointAccountHolder2, JointAccountHolder3, LoanGuarantee1, LoanGuarantee2, LoanGuarantee3, LoanGuarantee4, AccountType, PassdueType, PassdueInstallments, PassdueAmount, Active, PrintedRecordNo, PageNo, FDUpdateOptionID, OpenDate, AccountBalance
                                 });
 
-                                res.status(200).json({ message: 'Client details inserted successfully' });
+                                res.status(200).json({ message: 'Client details inserted successfully', success: true, AccountNumber: AccountNumber , CustomerID: CustomerID});
              
                             }
                         ); // end INSERT query

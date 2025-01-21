@@ -118,26 +118,6 @@ exports.loanSave = (req, res) => {
             const StationaryCharge = "-";
             const LoanReasonID = "-";
 
-            
-
-            // Generate next AccountNumber
-            db.query(
-                `SELECT MAX(CAST(RIGHT(AccountNumber, 5) AS UNSIGNED)) AS maxAccountNumber 
-                 FROM ledgerdetails WHERE LedgerID = ?`,
-                [ledgerID],
-                (error, result) => {
-                    if (error) { 
-                        return res.status(500).json({ message: 'Server error, please try again later' }); 
-                    }
-
-                    let nextAccountNumber = result[0].maxAccountNumber ? result[0].maxAccountNumber + 1 : 1;
-                    if (nextAccountNumber > 99999) {
-                        return res.status(400).json({ message: 'Account number limit reached' });
-                    }
-
-                    const AccountNumber = `${ledgerID}-` + nextAccountNumber.toString().padStart(5, '0');
-                    // console.log("Generated AccountNumber:", AccountNumber); // Log for verification
-
 
                     // Check for LoanGuarantee1 avelable or not in DB
                     db.query('SELECT CustomerID FROM customerinformation WHERE CustomerID = ?', [LoanGuarantee1], (error, result) => {
@@ -226,6 +206,25 @@ exports.loanSave = (req, res) => {
 
                             }
 
+                    // Generate next AccountNumber
+                    db.query(
+                        `SELECT MAX(CAST(RIGHT(AccountNumber, 5) AS UNSIGNED)) AS maxAccountNumber 
+                        FROM ledgerdetails WHERE LedgerID = ?`,
+                        [ledgerID],
+                        (error, result) => {
+                            if (error) { 
+                                return res.status(500).json({ message: 'Server error, please try again later' }); 
+                            }
+
+                            let nextAccountNumber = result[0].maxAccountNumber ? result[0].maxAccountNumber + 1 : 1;
+                            if (nextAccountNumber > 99999) {
+                                return res.status(400).json({ message: 'Account number limit reached' });
+                            }
+
+                            const AccountNumber = `${ledgerID}-` + nextAccountNumber.toString().padStart(5, '0');
+                            // console.log("Generated AccountNumber:", AccountNumber); // Log for verification
+
+
                         // Insert client data to table
                         db.query(
                             'INSERT INTO ledgerdetails (LedgerID, AccountNumber, LoanApplicationNo, CustomerID, InterestAccount, AccountBalance, IssuedLoanAmount, LoanInstallment, Period, OpenDate, DueDate, AccountLastTransactionDate, LoanStartDate, LoanFreeTime, InterestPolicy, InterestRate, AccountType, LoanAccountType, PassdueType, Active, LoanApprovalStatus, LoanApprovedDate, LoanApprovedBy, PassBookType, PrintedRecordNo, PageNo, pawn_MarketValue, pawn_EstimatedAmount, pawn_PaymentAmount, pawn_Reason, pawn_ItemTotalWeight, pawn_ItemGoldWeight, LoanGuarantee1, LoanGuarantee2, LoanGuarantee3, LoanGuarantee4, StationaryCharge, LoanReasonID, PenaltyRate, PenaltyInterestPolicy, HoldFDAccount, HoldAmount, HoldDescription, PenaltyOrReservationAccount) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -240,7 +239,7 @@ exports.loanSave = (req, res) => {
                                     ledgerID, AccountNumber, LoanApplicationNo, CustomerID, InterestAccount, AccountBalance, IssuedLoanAmount, LoanInstallment, Period, LoanStartDate, DueDate, AccountLastTransactionDate, LoanStartDate, LoanFreeTime, InterestPolicy, InterestRate, AccountType, LoanAccountType, PassdueType, Active, LoanApprovalStatus, LoanApprovedDate, LoanApprovedBy, PassBookType, PrintedRecordNo, PageNo, pawn_MarketValue, pawn_EstimatedAmount, pawn_PaymentAmount, pawn_Reason, pawn_ItemTotalWeight, pawn_ItemGoldWeight, LoanGuarantee1, LoanGuarantee2, LoanGuarantee3, LoanGuarantee4, StationaryCharge, LoanReasonID, PenaltyRate, PenaltyInterestPolicy, HoldFDAccount, HoldAmount, HoldDescription, PenaltyOrReservationAccount
                                 });
 
-                                res.status(200).json({ message: 'Client details inserted successfully' });
+                                res.status(200).json({ message: 'Client details inserted successfully', success: true, AccountNumber: AccountNumber , CustomerID: CustomerID });
                             }
                         );
                     }); // end Loan Guarantee 1 check query

@@ -186,9 +186,10 @@ exports.fixedDepositSave = (req, res) => {
                     const AccountNumber = `${ledgerID}-` + nextAccountNumber.toString().padStart(5, '0');
                     // console.log("Generated AccountNumber:", AccountNumber); // Log for verification
 
+                    // Check if the AccountNumber already exists
                     db.query('SELECT AccountNumber FROM ledgerdetails WHERE AccountNumber = ?', [AccountNumber], (error, result) => {
                         if (error) return res.status(500).json({ message: 'Server error, please try again later' });
-                        if (result.length > 0) return res.status(400).json({ message: 'This customer has already paid for this product' });
+                        if (result.length > 0) return res.status(400).json({ message: 'This AccountNumber already exists' });
 
 
                         
@@ -203,7 +204,7 @@ exports.fixedDepositSave = (req, res) => {
                                     issued_field_officer, PaidFDInterestAmount, ledgerID, AccountNumber, CustomerID, InterestAccount, PenaltyOrReservationAccount, FundAccount, DepriciationAccount, DebitAmount, CreditAmount, MinimumAccountBalance, LowestAccountBalance, HoldAmount, HoldDescription, Period, OpenDate, DueDate, LoanStartDate, LoanFreeTime, InterestPolicy, InterestRate, InterestAmount, DueInterestAmount, ReservedInterest, PenaltyInterestPolicy, PenaltyRate, PenaltyInterestAmount, DepriciationPolicy, DepriciationRate, RequestedLoanAmount, ApprovedLoanAmount, JointAccountHolder1, JointAccountHolder2, JointAccountHolder3, LoanGuarantee1, LoanGuarantee2, LoanGuarantee3, LoanGuarantee4, AccountType, PassdueType, PassdueInstallments, PassdueAmount, Active, PrintedRecordNo, PageNo, FDUpdateOptionID, OpenDate, AccountBalance
                                 });
 
-                                res.status(200).json({ message: 'Client details inserted successfully' });
+                                res.status(200).json({ message: 'Client details inserted successfully', success: true, AccountNumber: AccountNumber , CustomerID: CustomerID});
                             }
                         );
                     });

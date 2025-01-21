@@ -16,7 +16,6 @@ const currentAccountDetailsController = require('./controllers/showDetails/curre
 const cusRegiController = require('./controllers/customer/cusRegiController');
 const cusInfoUpdateController = require('./controllers/customer/cusInfoUpdateController');
 const cusInforShowController = require('./controllers/customer/cusInforShowController');
-const allInstituteListController = require('./controllers/customer/allInstituteListController');
 
 const loginController = require('./controllers/auth/loginController');
 const GSDivisionNoListController = require('./controllers/customer/dropDown/GSDivisionNoListController');
@@ -60,11 +59,8 @@ router.put('/customer-info-update' ,cusInfoUpdateController.cusInfoUpdate);
 router.get('/customer-info' ,cusInforShowController.cusInfoShow);
 
 //Lists
-// show institute List (requeried LedgerID)
-router.post('/instituteList' ,instituteListController.instituteList);
-
-// show all institute list without any user input
-router.get('/allInstituteList' ,allInstituteListController.allInstituteList);
+// show institute list without any user input
+router.get('/instituteList' ,instituteListController.instituteList);
 
 
 // these 3 end points are for GSDivision, chose one of them

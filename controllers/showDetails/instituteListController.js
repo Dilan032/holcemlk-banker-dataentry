@@ -1,40 +1,21 @@
 const db = require('../../database');
 
-// Get Institute List using user input LedgerID
+// Get Institute List 
 exports.instituteList = (req, res) => {
-    const ledgeraccount = req.body; // Get user input from user
 
-    // Check if LedgerID is provided
-    if ( ledgeraccount.LedgerID === undefined || ledgeraccount.LedgerID === null ) {
-        return res.status(400).json({ message: 'Please provide LedgerID' });
-    }
-
-    // Get InstituteID
-    db.query('SELECT InstituteID FROM ledgeraccounts WHERE LedgerID = ?', [ledgeraccount.LedgerID], (error, result) => {
+    // Get Institute name
+    db.query('SELECT InstituteName,InstituteID FROM instituteinformation WHERE SectionType = ?', ['BANK'], (error, result) => {
         if (error) {
             return res.status(500).json({ message: 'Server error, please try again later' });
         }
 
         if (result.length === 0) {
-            return res.status(404).json({ message: 'Institute id not found' });
+            return res.status(404).json({ message: 'Institutes not found' });
         }
 
-        const instituteID = result[0].InstituteID;
-
-        // Get Institute name
-        db.query('SELECT InstituteName,InstituteID FROM instituteinformation WHERE InstituteID = ?', [instituteID], (error, result) => {
-            if (error) {
-                return res.status(500).json({ message: 'Server error, please try again later' });
-            }
-
-            if (result.length === 0) {
-                return res.status(404).json({ message: 'Institute Name not found' });
-            }
-
-            // Return Institute information
-            // res.status(200).json(result[0]);
-            const ledgerNames = result.map(row => ({ InstituteName: row.InstituteName, InstituteID: row.InstituteID }));
-            res.status(200).json(ledgerNames);
-        });
+        // Return Institute information
+        const ledgerNames = result.map(row => ({ InstituteName: row.InstituteName, InstituteID: row.InstituteID }));
+        res.status(200).json(ledgerNames);
     });
+        
 };

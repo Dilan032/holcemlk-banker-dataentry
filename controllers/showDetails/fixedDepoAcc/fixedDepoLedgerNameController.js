@@ -1,7 +1,23 @@
 const db = require('../../../database');
 
 exports.fixedDepoLedgerName = (req, res) => {
-    db.query('SELECT LedgerName, LedgerID FROM ledgeraccounts WHERE AccountType = ?', ['FD'], (error, result) => {
+    const data = req.body;
+    const InstituteID = data.InstituteID;
+
+    if (!InstituteID) {
+        return res.status(400).json({ message: 'Please provide the Institute ID to search products' });
+    }
+
+    const searchPattern = `${InstituteID}%`; // Match LedgerID starting with InstituteID
+
+    const query = `
+        SELECT LedgerName, LedgerID 
+        FROM ledgeraccounts 
+        WHERE (AccountType = ? ) 
+        AND CAST(LedgerID AS CHAR) LIKE ?
+    `;
+
+    db.query(query, ['FD', searchPattern], (error, result) => {
         if (error) {
             return res.status(500).json({ message: 'Server error, please try again later' });
         }

@@ -35,7 +35,8 @@ exports.searchClient = (req, res) => {
             }
 
             if (FDAccountDetailsResult.length === 0) {
-                return res.status(404).json({ message: 'Customer information not found' });
+                console.log("get customer FD ACCOUNT Details", error);
+                // return res.status(404).json({ message: 'Customer information not found' });
             }
 
 

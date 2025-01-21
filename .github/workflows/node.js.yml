@@ -18,10 +18,14 @@ jobs:
       mysql:
         image: mysql:5.7
         env:
-          DATABASE = holcemlk_banker_dataentry
-          DATABASE_HOST = 209.133.220.90
-          DATABASE_USER = holcemlk_user
-          DATABASE_PASSWORD = PRB1WgD?41zW
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: holcemlk_banker_dataentry
+          MYSQL_USER: holcemlk_user
+          MYSQL_PASSWORD: PRB1WgD?41zW
+  #                   DATABASE = 
+  # DATABASE_HOST = 209.133.220.90
+  # DATABASE_USER = holcemlk_user
+  # DATABASE_PASSWORD = PRB1WgD?41zW
         ports:
           - 3306:3306
         options: >-
